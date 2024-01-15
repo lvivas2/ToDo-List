@@ -1,7 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, TextField, IconButton, Paper, InputBase } from "@mui/material";
 
-function TodoSearch({ SearchState, setSearchState }) {
+function TodoSearch({ searchValue, setSearchValue }) {
   return (
     <Box>
       <Paper
@@ -11,9 +11,9 @@ function TodoSearch({ SearchState, setSearchState }) {
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Buscar"
-          value={SearchState}
+          value={searchValue}
           onChange={(event) => {
-            setSearchState(event.target.value);
+            setSearchValue(event.target.value);
           }}
         />
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
