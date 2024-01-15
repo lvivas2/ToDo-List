@@ -35,7 +35,7 @@ function TodoCounter({ total, completed }) {
               width: "100%",
             }}
           >
-            <h1
+            <h3
               style={{
                 margin: 0,
                 color: "#363636",
@@ -46,8 +46,8 @@ function TodoCounter({ total, completed }) {
                 width: "100%",
               }}
             >
-              Done tasks <span>({completed})</span>
-            </h1>
+              Done tasks <span>({completed})</span> to <span>({total})</span>
+            </h3>
           </Box>
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>

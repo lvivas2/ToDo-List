@@ -11,14 +11,22 @@ import { useState } from "react";
 const defaultTodos = [
   { text: "Cortar cebolla", completed: true },
   { text: "Tomar el Curso de Intro a React.js", completed: false },
-  { text: "Llorar con la Llorona", completed: false },
+  { text: "Llorar con la Llorona", completed: true },
+  { text: "Comer cereal", completed: false },
   { text: "Hacer el amuerzo", completed: true },
+  { text: "Limpiar", completed: true },
 ];
 
 function Componnents() {
-  const [searchState, setSearchState] = React.useState();
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState("");
 
-  console.log("Esto es lo que escribiste " + searchState);
+  const completeTodos = todos.filter((todo) => !!todo.completed).length;
+  const totalTodos = todos.length;
+
+  // ToDos por completar
+  const tasksTodo = todos.filter((todo) => !todo.completed).length;
+
   return (
     <>
       <Box
@@ -59,8 +67,8 @@ function Componnents() {
             Today’s task
           </h2>
           <TodoSearch
-            searchState={searchState}
-            setSearchState={setSearchState}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
           <TodoList>
             {defaultTodos.map((todo) => (
@@ -71,7 +79,7 @@ function Componnents() {
               />
             ))}
           </TodoList>
-          <TodoCounter completed={16} total={25} />
+          <TodoCounter completed={completeTodos} total={totalTodos} />
           <CreateTodoButton />
         </Box>
       </Box>
