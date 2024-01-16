@@ -27,6 +27,10 @@ function Componnents() {
   // ToDos por completar
   const tasksTodo = todos.filter((todo) => !todo.completed).length;
 
+  const filteredItems = todos.filter((todo) =>
+    todo.text.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <>
       <Box
@@ -70,14 +74,20 @@ function Componnents() {
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />
+
           <TodoList>
-            {defaultTodos.map((todo) => (
-              <TodoItem
-                key={todo.text}
-                text={todo.text}
-                completed={todo.completed}
-              />
-            ))}
+            {filteredItems.length ? (
+              filteredItems.map((todo) => (
+                <TodoItem
+                  key={todo.text}
+                  text={todo.text}
+                  completed={todo.completed}
+                  searchValue={searchValue}
+                />
+              ))
+            ) : (
+              <h3>Sin coincidencia</h3>
+            )}
           </TodoList>
           <TodoCounter completed={completeTodos} total={totalTodos} />
           <CreateTodoButton />

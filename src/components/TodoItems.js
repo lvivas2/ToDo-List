@@ -3,7 +3,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Typography, Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 
 const styleTodoItems = {
   display: "flex",
@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-function TodoItem(props) {
+function TodoItem({ text, completed, searchValue }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -42,7 +42,7 @@ function TodoItem(props) {
   return (
     <li style={styleTodoItems}>
       <span>
-        {props.completed ? (
+        {completed ? (
           <IconButton disabled>
             <TaskAltIcon sx={{ color: "rgba(135, 133, 246, 1)" }} />
           </IconButton>
@@ -53,11 +53,7 @@ function TodoItem(props) {
         )}
       </span>
       <p>
-        {props.completed ? (
-          <a style={styles.strikethrough}>{props.text}</a>
-        ) : (
-          <a>{props.text}</a>
-        )}
+        {completed ? <a style={styles.strikethrough}>{text}</a> : <a>{text}</a>}
       </p>
       <span>
         <IconButton
