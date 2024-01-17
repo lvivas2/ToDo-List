@@ -3,7 +3,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Typography, Menu, MenuItem, ListItemButton } from "@mui/material";
+import { Menu, MenuItem, ListItemButton } from "@mui/material";
 
 const styleTodoItems = {
   display: "flex",
@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-function TodoItem({ completed, text, onComplete, onDelete }) {
+function TodoItem({ text, completed, onComplete, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {

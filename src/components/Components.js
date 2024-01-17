@@ -42,6 +42,10 @@ function Componnents() {
     setTodos(updateTodo);
   };
 
+  const filteredItems = todos.filter((todo) =>
+    todo.text.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <>
       <Box
@@ -97,15 +101,19 @@ function Componnents() {
             />
           </Box>
           <TodoList>
-            {todos.map((todo) => (
-              <TodoItem
-                key={todo.id}
-                text={todo.text}
-                completed={todo.completed}
-                onComplete={() => todoCompleted(todo.text)}
-                onDelete={() => todoDelete(todo.text)}
-              />
-            ))}
+            {filteredItems.length ? (
+              filteredItems.map((todo) => (
+                <TodoItem
+                  key={todo.text}
+                  text={todo.text}
+                  completed={todo.completed}
+                  onComplete={() => todoCompleted(todo.text)}
+                  onDelete={() => todoDelete(todo.text)}
+                />
+              ))
+            ) : (
+              <h3>Sin coincidencia</h3>
+            )}
           </TodoList>
           <TodoCounter completed={completeTodos} total={totalTodos} />
           <CreateTodoButton />
