@@ -6,15 +6,14 @@ import { TodoItem } from "./TodoItems";
 import { CreateTodoButton } from "./CreateTodoButton";
 import { Box } from "@mui/material";
 import backgroundImage from "../img/backgroundImage.png";
-import { useState } from "react";
 
 const defaultTodos = [
-  { text: "Cortar cebolla", completed: true },
-  { text: "Tomar el Curso de Intro a React.js", completed: false },
-  { text: "Llorar con la Llorona", completed: true },
-  { text: "Comer cereal", completed: false },
-  { text: "Hacer el amuerzo", completed: true },
-  { text: "Limpiar", completed: true },
+  { id: 1, text: "Cortar cebolla", completed: true },
+  { id: 2, text: "Tomar el Curso de Intro a React.js", completed: false },
+  { id: 3, text: "Llorar con la Llorona", completed: true },
+  { id: 4, text: "Comer cereal", completed: false },
+  { id: 5, text: "Hacer el amuerzo", completed: true },
+  { id: 6, text: "Limpiar", completed: true },
 ];
 
 function Componnents() {
@@ -26,6 +25,22 @@ function Componnents() {
 
   // ToDos por completar
   const tasksTodo = todos.filter((todo) => !todo.completed).length;
+
+  const todoCompleted = (text) => {
+    const updateTodo = [...todos];
+    const todoIndex = updateTodo.findIndex((todo) => todo.text == text);
+
+    updateTodo[todoIndex].completed = true;
+    setTodos(updateTodo);
+  };
+
+  const todoDelete = (text) => {
+    const updateTodo = [...todos];
+    const todoIndex = updateTodo.findIndex((todo) => todo.text == text);
+
+    updateTodo.splice(todoIndex, 1);
+    setTodos(updateTodo);
+  };
 
   return (
     <>
@@ -53,29 +68,42 @@ function Componnents() {
             backgroundSize: "cover",
             boxShadow: "1px 1px 8px 0px rgba(0, 0, 0, 0.25)",
             height: "90vh",
+            overflow: "auto",
+            gridTemplateRows: "auto 1fr auto auto",
           }}
         >
-          <h2
-            style={{
-              color: "#FFFF",
-              fontSize: "20px",
-              fontStyle: "normal",
-              fontWeight: "500",
-              lineHeight: "normal",
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBottom: "10px",
             }}
           >
-            Today’s task
-          </h2>
-          <TodoSearch
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-          />
+            <h2
+              style={{
+                color: "#FFFF",
+                fontSize: "20px",
+                fontStyle: "normal",
+                fontWeight: "500",
+                lineHeight: "normal",
+              }}
+            >
+              Today’s task
+            </h2>
+            <TodoSearch
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
+          </Box>
           <TodoList>
-            {defaultTodos.map((todo) => (
+            {todos.map((todo) => (
               <TodoItem
-                key={todo.text}
+                key={todo.id}
                 text={todo.text}
                 completed={todo.completed}
+                onComplete={() => todoCompleted(todo.text)}
+                onDelete={() => todoDelete(todo.text)}
               />
             ))}
           </TodoList>

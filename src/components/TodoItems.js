@@ -3,7 +3,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Typography, Menu, MenuItem } from "@mui/material";
+import { Typography, Menu, MenuItem, ListItemButton } from "@mui/material";
 
 const styleTodoItems = {
   display: "flex",
@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-function TodoItem(props) {
+function TodoItem({ completed, text, onComplete, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -34,30 +34,21 @@ function TodoItem(props) {
     setAnchorEl(null);
   };
 
-  const handleDelate = () => {
-    // Lógica para la acción 1
-    handleClose();
-  };
-
   return (
     <li style={styleTodoItems}>
       <span>
-        {props.completed ? (
+        {completed ? (
           <IconButton disabled>
             <TaskAltIcon sx={{ color: "rgba(135, 133, 246, 1)" }} />
           </IconButton>
         ) : (
-          <IconButton>
+          <IconButton onClick={onComplete}>
             <TaskAltIcon sx={{ color: "rgba(204, 204, 204, 1)" }} />
           </IconButton>
         )}
       </span>
       <p>
-        {props.completed ? (
-          <a style={styles.strikethrough}>{props.text}</a>
-        ) : (
-          <a>{props.text}</a>
-        )}
+        {completed ? <a style={styles.strikethrough}>{text}</a> : <a>{text}</a>}
       </p>
       <span>
         <IconButton
@@ -74,7 +65,7 @@ function TodoItem(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleDelate}>
+          <MenuItem onClick={onDelete}>
             <DeleteIcon
               fontSize="small"
               sx={{ color: "rgba(204, 204, 204, 1)", marginRight: "5px" }}
