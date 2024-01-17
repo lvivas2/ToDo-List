@@ -3,7 +3,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem, ListItemButton } from "@mui/material";
 
 const styleTodoItems = {
   display: "flex",
@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-function TodoItem({ text, completed, searchValue }) {
+function TodoItem({ text, completed, searchValue, onComplete, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -34,11 +34,6 @@ function TodoItem({ text, completed, searchValue }) {
     setAnchorEl(null);
   };
 
-  const handleDelate = () => {
-    // Lógica para la acción 1
-    handleClose();
-  };
-
   return (
     <li style={styleTodoItems}>
       <span>
@@ -47,7 +42,7 @@ function TodoItem({ text, completed, searchValue }) {
             <TaskAltIcon sx={{ color: "rgba(135, 133, 246, 1)" }} />
           </IconButton>
         ) : (
-          <IconButton>
+          <IconButton onClick={onComplete}>
             <TaskAltIcon sx={{ color: "rgba(204, 204, 204, 1)" }} />
           </IconButton>
         )}
@@ -70,7 +65,7 @@ function TodoItem({ text, completed, searchValue }) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleDelate}>
+          <MenuItem onClick={onDelete}>
             <DeleteIcon
               fontSize="small"
               sx={{ color: "rgba(204, 204, 204, 1)", marginRight: "5px" }}
