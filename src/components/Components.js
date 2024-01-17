@@ -107,7 +107,6 @@ function Componnents() {
                   key={todo.text}
                   text={todo.text}
                   completed={todo.completed}
-                  searchValue={searchValue}
                   onComplete={() => todoCompleted(todo.text)}
                   onDelete={() => todoDelete(todo.text)}
                 />

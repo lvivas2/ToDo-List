@@ -23,7 +23,7 @@ const styles = {
   },
 };
 
-function TodoItem({ text, completed, searchValue, onComplete, onDelete }) {
+function TodoItem({ text, completed, onComplete, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
